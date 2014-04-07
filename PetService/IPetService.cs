@@ -8,7 +8,6 @@ using System.Text;
 
 namespace PetService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IPetService
     {
@@ -16,15 +15,13 @@ namespace PetService
         IAsyncResult BeginGetPetOwner(AsyncCallback callback, object state);
         PetOwner EndGetPetOwner(IAsyncResult result);
 
-        [OperationContract(AsyncPattern = true)]
-        IAsyncResult BeginGetPet(AsyncCallback callback, object state);
-        PetModel EndGetPet(IAsyncResult result);
+        //[OperationContract(AsyncPattern = true)]
+        //IAsyncResult BeginGetPet(AsyncCallback callback, object state);
+        //PetModel EndGetPet(IAsyncResult result);
 
-        //[OperationContract]
-        //void UpdatePerson(Guid guid, Patient patient);
-        //[OperationContract]
-        //void UpdatePet(Guid guid, Pet script);
-
-        // TODO: Add your service operations here
+        [OperationContract(IsOneWay = true)]
+        void UpdatePetOwner(Guid guid, PetOwner model);
+        [OperationContract(IsOneWay = true)]
+        void UpdatePetModel(Guid guid, PetModel model);
     }
 }

@@ -32,12 +32,12 @@ namespace PetService
             throw new NotImplementedException();
         }
 
-        public IAsyncResult BeginGetPet(AsyncCallback callback, object state)
+        public void UpdatePetOwner(Guid guid, PetClubLib.Models.PetOwner model)
         {
             throw new NotImplementedException();
         }
 
-        public PetClubLib.Models.PetModel EndGetPet(IAsyncResult result)
+        public void UpdatePetModel(Guid guid, PetClubLib.Models.PetModel model)
         {
             throw new NotImplementedException();
         }

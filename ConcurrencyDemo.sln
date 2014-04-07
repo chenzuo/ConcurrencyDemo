@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PetClub", "PetClub\PetClub.sqlproj", "{5C832C40-22C2-4D71-A34E-6989FE5C8A3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetConsole", "PetConsole\PetConsole.csproj", "{B6A79D12-A67D-46D4-AB88-9EC9D15317D9}"
