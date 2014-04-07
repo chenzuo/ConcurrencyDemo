@@ -21,11 +21,41 @@ namespace PetConsole.PetService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/GetPetOwner", ReplyAction="http://tempuri.org/IPetService/GetPetOwnerResponse")]
         System.Threading.Tasks.Task<PetClubLib.Models.PetOwner> GetPetOwnerAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/GetPet", ReplyAction="http://tempuri.org/IPetService/GetPetResponse")]
-        PetClubLib.Models.PetModel GetPet();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/AddPetOwner")]
+        void AddPetOwner(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/GetPet", ReplyAction="http://tempuri.org/IPetService/GetPetResponse")]
-        System.Threading.Tasks.Task<PetClubLib.Models.PetModel> GetPetAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/AddPetOwner")]
+        System.Threading.Tasks.Task AddPetOwnerAsync(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/UpdatePetOwner")]
+        void UpdatePetOwner(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/UpdatePetOwner")]
+        System.Threading.Tasks.Task UpdatePetOwnerAsync(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/DeletePetOwner")]
+        void DeletePetOwner(PetClubLib.Models.SessionKey key, long id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/DeletePetOwner")]
+        System.Threading.Tasks.Task DeletePetOwnerAsync(PetClubLib.Models.SessionKey key, long id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/UpdatePetModel")]
+        void UpdatePetModel(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetModel model);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPetService/UpdatePetModel")]
+        System.Threading.Tasks.Task UpdatePetModelAsync(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetModel model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/RegisterClient", ReplyAction="http://tempuri.org/IPetService/RegisterClientResponse")]
+        PetClubLib.Models.SessionKey RegisterClient(string user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/RegisterClient", ReplyAction="http://tempuri.org/IPetService/RegisterClientResponse")]
+        System.Threading.Tasks.Task<PetClubLib.Models.SessionKey> RegisterClientAsync(string user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/UnregisterClient", ReplyAction="http://tempuri.org/IPetService/UnregisterClientResponse")]
+        void UnregisterClient(PetClubLib.Models.SessionKey key);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPetService/UnregisterClient", ReplyAction="http://tempuri.org/IPetService/UnregisterClientResponse")]
+        System.Threading.Tasks.Task UnregisterClientAsync(PetClubLib.Models.SessionKey key);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,12 +93,52 @@ namespace PetConsole.PetService {
             return base.Channel.GetPetOwnerAsync();
         }
         
-        public PetClubLib.Models.PetModel GetPet() {
-            return base.Channel.GetPet();
+        public void AddPetOwner(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model) {
+            base.Channel.AddPetOwner(key, model);
         }
         
-        public System.Threading.Tasks.Task<PetClubLib.Models.PetModel> GetPetAsync() {
-            return base.Channel.GetPetAsync();
+        public System.Threading.Tasks.Task AddPetOwnerAsync(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model) {
+            return base.Channel.AddPetOwnerAsync(key, model);
+        }
+        
+        public void UpdatePetOwner(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model) {
+            base.Channel.UpdatePetOwner(key, model);
+        }
+        
+        public System.Threading.Tasks.Task UpdatePetOwnerAsync(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetOwner model) {
+            return base.Channel.UpdatePetOwnerAsync(key, model);
+        }
+        
+        public void DeletePetOwner(PetClubLib.Models.SessionKey key, long id) {
+            base.Channel.DeletePetOwner(key, id);
+        }
+        
+        public System.Threading.Tasks.Task DeletePetOwnerAsync(PetClubLib.Models.SessionKey key, long id) {
+            return base.Channel.DeletePetOwnerAsync(key, id);
+        }
+        
+        public void UpdatePetModel(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetModel model) {
+            base.Channel.UpdatePetModel(key, model);
+        }
+        
+        public System.Threading.Tasks.Task UpdatePetModelAsync(PetClubLib.Models.SessionKey key, PetClubLib.Models.PetModel model) {
+            return base.Channel.UpdatePetModelAsync(key, model);
+        }
+        
+        public PetClubLib.Models.SessionKey RegisterClient(string user) {
+            return base.Channel.RegisterClient(user);
+        }
+        
+        public System.Threading.Tasks.Task<PetClubLib.Models.SessionKey> RegisterClientAsync(string user) {
+            return base.Channel.RegisterClientAsync(user);
+        }
+        
+        public void UnregisterClient(PetClubLib.Models.SessionKey key) {
+            base.Channel.UnregisterClient(key);
+        }
+        
+        public System.Threading.Tasks.Task UnregisterClientAsync(PetClubLib.Models.SessionKey key) {
+            return base.Channel.UnregisterClientAsync(key);
         }
     }
 }

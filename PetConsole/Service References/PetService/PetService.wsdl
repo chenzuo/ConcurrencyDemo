@@ -13,20 +13,54 @@
   <wsdl:message name="IPetService_GetPetOwner_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPetOwnerResponse" />
   </wsdl:message>
-  <wsdl:message name="IPetService_GetPet_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPet" />
+  <wsdl:message name="IPetService_AddPetOwner_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPetOwner" />
   </wsdl:message>
-  <wsdl:message name="IPetService_GetPet_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPetResponse" />
+  <wsdl:message name="IPetService_UpdatePetOwner_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePetOwner" />
+  </wsdl:message>
+  <wsdl:message name="IPetService_DeletePetOwner_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePetOwner" />
+  </wsdl:message>
+  <wsdl:message name="IPetService_UpdatePetModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePetModel" />
+  </wsdl:message>
+  <wsdl:message name="IPetService_RegisterClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterClient" />
+  </wsdl:message>
+  <wsdl:message name="IPetService_RegisterClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPetService_UnregisterClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnregisterClient" />
+  </wsdl:message>
+  <wsdl:message name="IPetService_UnregisterClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnregisterClientResponse" />
   </wsdl:message>
   <wsdl:portType name="IPetService">
     <wsdl:operation name="GetPetOwner">
       <wsdl:input wsam:Action="http://tempuri.org/IPetService/GetPetOwner" message="tns:IPetService_GetPetOwner_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IPetService/GetPetOwnerResponse" message="tns:IPetService_GetPetOwner_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPet">
-      <wsdl:input wsam:Action="http://tempuri.org/IPetService/GetPet" message="tns:IPetService_GetPet_InputMessage" />
-      <wsdl:output wsam:Action="http://tempuri.org/IPetService/GetPetResponse" message="tns:IPetService_GetPet_OutputMessage" />
+    <wsdl:operation name="AddPetOwner">
+      <wsdl:input wsam:Action="http://tempuri.org/IPetService/AddPetOwner" message="tns:IPetService_AddPetOwner_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePetOwner">
+      <wsdl:input wsam:Action="http://tempuri.org/IPetService/UpdatePetOwner" message="tns:IPetService_UpdatePetOwner_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePetOwner">
+      <wsdl:input wsam:Action="http://tempuri.org/IPetService/DeletePetOwner" message="tns:IPetService_DeletePetOwner_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePetModel">
+      <wsdl:input wsam:Action="http://tempuri.org/IPetService/UpdatePetModel" message="tns:IPetService_UpdatePetModel_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterClient">
+      <wsdl:input wsam:Action="http://tempuri.org/IPetService/RegisterClient" message="tns:IPetService_RegisterClient_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IPetService/RegisterClientResponse" message="tns:IPetService_RegisterClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterClient">
+      <wsdl:input wsam:Action="http://tempuri.org/IPetService/UnregisterClient" message="tns:IPetService_UnregisterClient_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IPetService/UnregisterClientResponse" message="tns:IPetService_UnregisterClient_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPetService" type="tns:IPetService">
@@ -40,8 +74,41 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPet">
-      <soap:operation soapAction="http://tempuri.org/IPetService/GetPet" style="document" />
+    <wsdl:operation name="AddPetOwner">
+      <soap:operation soapAction="http://tempuri.org/IPetService/AddPetOwner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePetOwner">
+      <soap:operation soapAction="http://tempuri.org/IPetService/UpdatePetOwner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePetOwner">
+      <soap:operation soapAction="http://tempuri.org/IPetService/DeletePetOwner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePetModel">
+      <soap:operation soapAction="http://tempuri.org/IPetService/UpdatePetModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterClient">
+      <soap:operation soapAction="http://tempuri.org/IPetService/RegisterClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterClient">
+      <soap:operation soapAction="http://tempuri.org/IPetService/UnregisterClient" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

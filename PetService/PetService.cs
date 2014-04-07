@@ -1,4 +1,5 @@
-﻿using PetService.DbEntities;
+﻿using PetClubLib.Models;
+using PetService.DbEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,13 @@ namespace PetService
     {
         internal PetService()
         {
-            Clients = new Dictionary<Guid, ClientWorker>();
+            Clients = new Dictionary<SessionKey, ClientWorker>();
         }
-        Dictionary<Guid, ClientWorker> Clients { get; set; }
+        Dictionary<SessionKey, ClientWorker> Clients { get; set; }
 
         public IAsyncResult BeginGetPetOwner(AsyncCallback callback, object state)
         {
-            throw new NotImplementedException();
+            return new AsyncWorkerResult<PetOwner>(callback, state, this, "GetPetOwner");
         }
 
         public PetClubLib.Models.PetOwner EndGetPetOwner(IAsyncResult result)
@@ -32,14 +33,46 @@ namespace PetService
             throw new NotImplementedException();
         }
 
-        public void UpdatePetOwner(Guid guid, PetClubLib.Models.PetOwner model)
+        public void AddPetOwner(SessionKey key, PetOwner model)
+        {
+            if (Clients.ContainsKey(key))
+            {
+                Clients[key].AddPetOwner(model);
+            }
+        }
+
+        public void UpdatePetOwner(SessionKey key, PetOwner model)
+        {
+            if (Clients.ContainsKey(key))
+            {
+                Clients[key].UpdatePetOwner(model);
+            }
+        }
+
+        public void DeletePetOwner(SessionKey key, long id)
+        {
+            if (Clients.ContainsKey(key))
+            {
+                Clients[key].DeletePetOwner(id);
+            }
+        }
+
+        public void UpdatePetModel(SessionKey key, PetModel model)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdatePetModel(Guid guid, PetClubLib.Models.PetModel model)
+        public SessionKey RegisterClient(string user)
         {
-            throw new NotImplementedException();
+            var key = new SessionKey() { Guid = Guid.NewGuid(), UserName = user };
+            Clients.Add(key, new ClientWorker(key));
+            return key;
+        }
+
+        public void UnregisterClient(SessionKey key)
+        {
+            if (Clients.ContainsKey(key))
+                Clients.Remove(key);
         }
     }
 

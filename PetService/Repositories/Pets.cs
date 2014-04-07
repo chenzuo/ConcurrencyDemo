@@ -29,9 +29,10 @@ namespace PetService.Repositories
 
         public override PetModel Get(long id)
         {
-            PetModel model = ToModel(SimpleCRUD.Get<Pet>(_connection, id));
-            if (model != null)
+            PetModel model = GetCache(id.ToString());
+            if (model == null)
             {
+                model = ToModel(SimpleCRUD.Get<Pet>(_connection, id));
                 UpdateCache(model, id.ToString());
             }
             return model;

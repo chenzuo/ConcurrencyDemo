@@ -30,28 +30,37 @@ namespace PetService.Repositories
 
         public override PetOwner Get(long id)
         {
-            PetOwner model = null;
-            var person = SimpleCRUD.Get<Person>(_connection, id);
-            if (person != null)
+            PetOwner model = GetCache(id.ToString());
+            if (model == null)
             {
-                model = ToModel(person, GetPetsForOwner(id));
-                UpdateCache(model, model.Id.ToString());
+                var person = SimpleCRUD.Get<Person>(_connection, id);
+                if (person != null)
+                {
+                    model = ToModel(person, GetPetsForOwner(id));
+                    UpdateCache(model, model.Id.ToString());
+                }
             }
             return model;
         }
 
         public List<PetOwner> GetList()
         {
-            var persons = SimpleCRUD.GetList<Person>(_connection);
-            if (persons != null && persons.Any())
+            List<PetOwner> result = GetCache().ToList();
+            if (!result.Any())
             {
-                return persons.Select(person => 
+                var persons = SimpleCRUD.GetList<Person>(_connection);
+                if (persons != null && persons.Any())
                 {
-                    var pets = GetPetsForOwner(person.Id);
-                    return ToModel(person, pets);
-                }).ToList();
+                    foreach (var person in persons)
+                    {
+                        var pets = GetPetsForOwner(person.Id);
+                        var model = ToModel(person, pets);
+                        result.Add(model);
+                        UpdateCache(model, model.Id.ToString());
+                    }
+                }
             }
-            return new List<PetOwner>();
+            return result;
         }
 
         public override void Delete(long id)

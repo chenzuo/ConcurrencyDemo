@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PetClubLib</RootNamespace>
-    <AssemblyName>PetEntities</AssemblyName>
+    <AssemblyName>PetClubLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,6 +44,7 @@
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\PetModel.cs" />
     <Compile Include="Models\PetOwner.cs" />
+    <Compile Include="Models\SessionKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

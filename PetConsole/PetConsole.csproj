@@ -32,7 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PetEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -44,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientComm.cs" />
-    <Compile Include="PetClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\PetService\Reference.cs">
@@ -58,6 +55,7 @@
     <None Include="App.config" />
     <None Include="Properties\DataSources\PetClubLib.Models.PetModel.datasource" />
     <None Include="Properties\DataSources\PetClubLib.Models.PetOwner.datasource" />
+    <None Include="Properties\DataSources\PetClubLib.Models.SessionKey.datasource" />
     <None Include="Service References\PetService\PetService.wsdl" />
     <None Include="Service References\PetService\PetService.xsd">
       <SubType>Designer</SubType>

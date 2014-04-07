@@ -7,7 +7,7 @@ using System.Runtime.Caching;
 
 namespace PetService.Repositories
 {
-    public abstract class RepositoryBase<T> where T : class, IModelMetadata
+    public abstract class RepositoryBase<T> where T : class, INotification
     {
         #region CRUD
         public abstract long? Insert(T obj);
@@ -20,12 +20,24 @@ namespace PetService.Repositories
         #endregion // CRUD
 
         #region Cache
+
+        protected void NotifyChanges(string key)
+        {
+            EventHandler handler = HasChanged;
+            if (handler != null) handler(this, new CacheChangedEventArgs(key));
+        }
+
+        object cacheLock = new object();
         protected virtual void UpdateCache(T entity, string key)
         {
             if (entity != null)
             {
-                entity.Timestamp = DateTime.Now;
-                _cache.Set(key, entity, new CacheItemPolicy { AbsoluteExpiration = CacheItemExpiration, UpdateCallback = RemoveCallback }, typeof(T).ToString());
+                lock (cacheLock)
+                {
+                    entity.Timestamp = DateTime.Now;
+                    _cache.Set(key, entity, new CacheItemPolicy { AbsoluteExpiration = CacheItemExpiration, UpdateCallback = RemoveCallback }, typeof(T).ToString());
+                }
+                NotifyChanges(key);
             }
         }
 
@@ -33,9 +45,23 @@ namespace PetService.Repositories
         {
             if (_cache.Contains(key, typeof(T).ToString()))
             {
-                _cache.Remove(key, typeof(T).ToString());
+                lock (cacheLock)
+                {
+                    _cache.Remove(key, typeof(T).ToString());
+                }
+                NotifyChanges(key);
             }
         }
+
+        //protected List<T> GetUpdates(long ticks)
+        //{
+            
+        //}
+
+        //protected bool HasChanges(long ticks)
+        //{
+        //    return _cache.Any(c => (c.Value is INotification) && (c.Value as INotification).Timestamp.Ticks > ticks);
+        //}
 
         protected virtual T GetCache(string key)
         {
@@ -71,7 +97,18 @@ namespace PetService.Repositories
         protected IDbConnection _connection;
         private static ObjectCache _cache = new CustomCache();
 
+        public event EventHandler HasChanged;
         public CacheEntryUpdateCallback RemoveCallback = delegate { };
+    }
+
+    public class CacheChangedEventArgs : EventArgs
+    {
+        public string Key { get; private set; }
+
+        public CacheChangedEventArgs(string key)
+        {
+            this.Key = key;
+        }
     }
 
     public class CustomCache : MemoryCache

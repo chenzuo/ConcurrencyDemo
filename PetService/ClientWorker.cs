@@ -11,40 +11,52 @@ namespace PetService
 {
     internal class ClientWorker
     {
-        public DateTime LastActivity { get; private set; }
-
         public void AddPetOwner(PetOwner person)
         {
-            _entities.PetOwners.Insert(person);
+            r.PetOwners.Insert(person);
         }
 
-        public PetOwner GetPetOwner(long id)
+        public void UpdatePetOwner(PetOwner person)
         {
-            return _entities.PetOwners.Get(id);
+            r.PetOwners.Update(person);
+        }
+
+        public PetOwner GetPetOwner(IAsyncResult async, long id)
+        {
+            var owner = r.PetOwners.Get(id);
+
+
+            return r.PetOwners.Get(id);
         }
 
         public void DeletePetOwner(long id)
         {
-            _entities.PetOwners.Delete(id);
+            r.PetOwners.Delete(id);
         }
 
         public void AddPet(PetModel pet)
         {
-            _entities.Pets.Insert(pet);
+            r.Pets.Insert(pet);
         }
 
         public void DeletePet(long id)
         {
-            _entities.Pets.Delete(id);
+            r.Pets.Delete(id);
         }
 
-        internal ClientWorker(Guid guid)
+        void OnCacheChanged(object o, EventArgs e)
         {
-            this.clientID = guid;
-            this._entities = new EntityRepository();
-            this.LastActivity = DateTime.MinValue;
+            lastActivity = DateTime.Now;
         }
-        EntityRepository _entities;
-        Guid clientID;
+
+        internal ClientWorker(SessionKey key)
+        {
+            this.r = EntityRepository.Instance;
+            lastActivity = DateTime.MinValue;
+            r.PetOwners.HasChanged += OnCacheChanged;
+            r.Pets.HasChanged += OnCacheChanged;
+        }
+        EntityRepository r;
+        DateTime lastActivity;
     }
 }

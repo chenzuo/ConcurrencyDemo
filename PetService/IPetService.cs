@@ -20,8 +20,17 @@ namespace PetService
         //PetModel EndGetPet(IAsyncResult result);
 
         [OperationContract(IsOneWay = true)]
-        void UpdatePetOwner(Guid guid, PetOwner model);
+        void AddPetOwner(SessionKey key, PetOwner model);
         [OperationContract(IsOneWay = true)]
-        void UpdatePetModel(Guid guid, PetModel model);
+        void UpdatePetOwner(SessionKey key, PetOwner model);
+        [OperationContract(IsOneWay = true)]
+        void DeletePetOwner(SessionKey key, long id);
+        [OperationContract(IsOneWay = true)]
+        void UpdatePetModel(SessionKey key, PetModel model);
+
+        [OperationContract]
+        SessionKey RegisterClient(string user);
+        [OperationContract]
+        void UnregisterClient(SessionKey key);
     }
 }

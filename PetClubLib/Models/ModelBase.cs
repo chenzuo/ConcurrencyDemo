@@ -4,13 +4,13 @@ using System.Runtime.Serialization;
 namespace PetClubLib.Models
 {
     [DataContract]
-    public abstract class ModelBase : IModelMetadata
+    public abstract class ModelBase : INotification
     {
         [DataMember]
         public DateTime Timestamp { get; set; }
     }
 
-    public interface IModelMetadata
+    public interface INotification
     {
         /// <summary>The time at which the entity was created.</summary>
         DateTime Timestamp { get; set; }

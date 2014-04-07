@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PetClubLib.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PetClubLib.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/PetClubLib.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PetClubLib.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:17695/PetService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="PetOwner">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ModelBase">
@@ -49,4 +50,11 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="PetSpecies" nillable="true" type="tns:PetSpecies" />
+  <xs:complexType name="SessionKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Guid" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SessionKey" nillable="true" type="tns:SessionKey" />
 </xs:schema>

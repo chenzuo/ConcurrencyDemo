@@ -12,8 +12,7 @@ namespace PetService.Test
         [TestInitialize]
         public void Initialize()
         {
-            _entities = new EntityRepository();
-
+            _entities = EntityRepository.Instance;
         }
 
         [TestMethod]

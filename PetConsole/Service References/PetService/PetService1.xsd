@@ -13,16 +13,62 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPet">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPetResponse">
+  <xs:element name="AddPetOwner">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="GetPetResult" nillable="true" type="q2:PetModel" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="key" nillable="true" type="q2:SessionKey" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="model" nillable="true" type="q3:PetOwner" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePetOwner">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="key" nillable="true" type="q4:SessionKey" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="model" nillable="true" type="q5:PetOwner" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeletePetOwner">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="key" nillable="true" type="q6:SessionKey" />
+        <xs:element minOccurs="0" name="id" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePetModel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="key" nillable="true" type="q7:SessionKey" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="model" nillable="true" type="q8:PetModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="RegisterClientResult" nillable="true" type="q9:SessionKey" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnregisterClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/PetClubLib.Models" minOccurs="0" name="key" nillable="true" type="q10:SessionKey" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnregisterClientResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>
