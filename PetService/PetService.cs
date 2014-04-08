@@ -25,10 +25,10 @@ namespace PetService
 
         public IAsyncResult BeginGetPetOwner(AsyncCallback callback, object state)
         {
-            return new AsyncWorkerResult<PetOwner>(callback, state, this, "GetPetOwner");
+            return new AsyncClientResult(callback, state, this, "GetPetOwner");
         }
 
-        public PetClubLib.Models.PetOwner EndGetPetOwner(IAsyncResult result)
+        public PetOwner EndGetPetOwner(IAsyncResult result)
         {
             throw new NotImplementedException();
         }
